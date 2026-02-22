@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al-Noor Topi House — Premium Ramadan Caps</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== TOAST ==================== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ==================== CART SIDEBAR ==================== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <div class="cart-title">🛒 Your Cart</div>
+      <div class="cart-close" onclick="closeCart()">✕</div>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">🧢</div>
+        <p>Your cart is empty.<br>Add some beautiful topis!</p>
+      </div>
+
+      <div id="cartTotalSection" style="display:none">
+        <div class="cart-total">
+          <div class="cart-total-label">TOTAL AMOUNT</div>
+          <div class="cart-total-price" id="cartTotal">Rs. 0</div>
+        </div>
+        <button class="btn-checkout" onclick="checkoutWhatsApp()">Proceed to Checkout</button>
+        <button class="btn-whatsapp-cart" onclick="checkoutWhatsApp()">
+          <span>📱</span> Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LIGHTBOX ==================== -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner">
+      <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+      <div id="lightboxSvg"></div>
+      <div class="lightbox-name" id="lightboxName"></div>
+      <div class="lightbox-desc" id="lightboxDesc"></div>
+      <button class="btn-primary" onclick="addToCartFromLightbox()">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <!-- Logo Icon (SVG inline for crisp rendering) -->
+      <svg class="nav-logo-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="#c9963a" stroke-width="1"/>
+        <path d="M20 8 A12 12 0 1 1 20 32 A8 8 0 1 0 20 8Z" fill="#c9963a"/>
+        <polygon points="26,14 27,17 30,17 27.5,19 28.5,22 26,20.5 23.5,22 24.5,19 22,17 25,17" fill="#c9963a"/>
+      </svg>
+      <div>
+        <div class="nav-brand-name">Al-Noor Topi House</div>
+        <div class="nav-brand-sub">Premium Ramadan Caps</div>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#features">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">
+        🛒 Cart
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <div class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <a href="#products" onclick="toggleNav()">Products</a>
+    <a href="#gallery"  onclick="toggleNav()">Gallery</a>
+    <a href="#features" onclick="toggleNav()">Why Us</a>
+    <a href="#contact"  onclick="toggleNav()">Contact</a>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="home">
+
+    <!-- Twinkling Stars (injected by JS) -->
+    <div class="hero-stars" id="heroStars"></div>
+
+    <!-- Islamic Geometric Pattern Background -->
+    <div class="pattern-bg">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="islamicPat" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+            <polygon points="40,5 55,20 75,20 60,35 65,55 40,45 15,55 20,35 5,20 25,20"
+                     fill="none" stroke="rgba(201,150,58,1)" stroke-width="0.8"/>
+            <rect x="30" y="30" width="20" height="20" fill="none"
+                  stroke="rgba(201,150,58,0.5)" stroke-width="0.5" transform="rotate(45 40 40)"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#islamicPat)"/>
+      </svg>
+    </div>
+
+    <!-- Animated Crescent Moon -->
+    <div class="hero-crescent">
+      <svg width="130" height="160" viewBox="0 0 130 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path d="M65 15 A50 50 0 1 1 65 145 A32 32 0 1 0 65 15Z"
+              fill="#c9963a" opacity="0.9" filter="url(#glow)"/>
+        <polygon points="90,28 93,36 102,36 95,41 98,50 90,45 82,50 85,41 78,36 87,36"
+                 fill="#e8c97a" opacity="0.95"/>
+        <polygon points="104,62 106,67 112,67 107,70 109,75 104,72 99,75 101,70 96,67 102,67"
+                 fill="#e8c97a" opacity="0.7" transform="scale(0.7) translate(45,35)"/>
+      </svg>
+    </div>
+
+    <!-- Left Lantern -->
+    <div class="hero-lantern-left">
+      <svg width="48" height="90" viewBox="0 0 48 90" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="0"  x2="24" y2="12" stroke="#c9963a" stroke-width="2"/>
+        <rect x="8"  y="12" width="32" height="4" rx="2" fill="#c9963a"/>
+        <path d="M10 16 Q8 50 12 68 L36 68 Q40 50 38 16Z"
+              fill="rgba(201,150,58,0.25)" stroke="#c9963a" stroke-width="1.5"/>
+        <line x1="24" y1="16" x2="24" y2="68" stroke="rgba(201,150,58,0.4)" stroke-width="0.8"/>
+        <line x1="14" y1="32" x2="34" y2="32" stroke="rgba(201,150,58,0.4)" stroke-width="0.8"/>
+        <line x1="13" y1="48" x2="35" y2="48" stroke="rgba(201,150,58,0.4)" stroke-width="0.8"/>
+        <rect x="18" y="68" width="12" height="6" rx="3" fill="#c9963a"/>
+        <ellipse cx="24" cy="80" rx="8" ry="3" fill="rgba(255,210,100,0.3)"/>
+      </svg>
+    </div>
+
+    <!-- Right Lantern -->
+    <div class="hero-lantern-right">
+      <svg width="48" height="90" viewBox="0 0 48 90" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="0"  x2="24" y2="12" stroke="#c9963a" stroke-width="2"/>
+        <rect x="8"  y="12" width="32" height="4" rx="2" fill="#c9963a"/>
+        <path d="M10 16 Q8 50 12 68 L36 68 Q40 50 38 16Z"
+              fill="rgba(201,150,58,0.25)" stroke="#c9963a" stroke-width="1.5"/>
+        <line x1="24" y1="16" x2="24" y2="68" stroke="rgba(201,150,58,0.4)" stroke-width="0.8"/>
+        <line x1="14" y1="32" x2="34" y2="32" stroke="rgba(201,150,58,0.4)" stroke-width="0.8"/>
+        <line x1="13" y1="48" x2="35" y2="48" stroke="rgba(201,150,58,0.4)" stroke-width="0.8"/>
+        <rect x="18" y="68" width="12" height="6" rx="3" fill="#c9963a"/>
+        <ellipse cx="24" cy="80" rx="8" ry="3" fill="rgba(255,210,100,0.3)"/>
+      </svg>
+    </div>
+
+    <!-- Hero Text Content -->
+    <div class="hero-content">
+      <div class="hero-arabic">رمضان مبارک</div>
+      <div class="hero-badge">✦ Blessed Ramadan Collection 2025 ✦</div>
+      <h1 class="hero-title">Buy Premium<br><span>Ramadan Topi</span></h1>
+      <p class="hero-subtitle">
+        Authentic handcrafted caps for your blessed prayers. Pure cotton, intricate embroidery,
+        and timeless Islamic designs — delivered to your door.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary"
+          onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+          Shop Collection
+        </button>
+        <button class="btn-outline"
+          onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+          View Gallery
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Designs</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">10K+</div>
+          <div class="hero-stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Pure Cotton</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MARQUEE ==================== -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      ✦ FREE DELIVERY ON ORDERS ABOVE RS. 2000 &nbsp;&nbsp;&nbsp;
+      ✦ RAMADAN SPECIAL DISCOUNTS &nbsp;&nbsp;&nbsp;
+      ✦ 100% PURE COTTON CAPS &nbsp;&nbsp;&nbsp;
+      ✦ HANDCRAFTED EMBROIDERY &nbsp;&nbsp;&nbsp;
+      ✦ EXPRESS SHIPPING AVAILABLE &nbsp;&nbsp;&nbsp;
+      ✦ FREE DELIVERY ON ORDERS ABOVE RS. 2000 &nbsp;&nbsp;&nbsp;
+      ✦ RAMADAN SPECIAL DISCOUNTS &nbsp;&nbsp;&nbsp;
+      ✦ 100% PURE COTTON CAPS &nbsp;&nbsp;&nbsp;
+      ✦ HANDCRAFTED EMBROIDERY &nbsp;&nbsp;&nbsp;
+      ✦ EXPRESS SHIPPING AVAILABLE &nbsp;&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <!-- ==================== PRODUCTS ==================== -->
+  <section class="section" id="products">
+    <div class="container">
+      <p class="section-tag centered reveal">Our Collection</p>
+      <h2 class="section-title dark reveal">
+        Premium <span class="gold">Ramadan Topi</span> Collection
+      </h2>
+      <p class="section-sub reveal">
+        Handpicked designs for your blessed moments of worship.
+        Each cap crafted with devotion and the finest materials.
+      </p>
+      <!-- Products injected by JS -->
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== GALLERY ==================== -->
+  <section class="section section-alt" id="gallery">
+    <div class="container">
+      <p class="section-tag centered reveal" style="color: var(--gold);">Design Gallery</p>
+      <h2 class="section-title light reveal">
+        Explore Our <span class="gold">Topi Designs</span>
+      </h2>
+      <p class="section-sub light reveal">Click any design to view details and add to your cart.</p>
+      <!-- Gallery injected by JS -->
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURES ==================== -->
+  <section class="section section-green" id="features">
+    <div class="container">
+      <p class="section-tag centered reveal" style="color: var(--gold-lt);">Why Choose Us</p>
+      <h2 class="section-title light reveal">Our <span class="gold">Promise</span> to You</h2>
+
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">🌿</div>
+          <div class="feature-title">100% Pure Cotton</div>
+          <div class="feature-text">
+            Breathable, skin-friendly fabric sourced from certified organic cotton farms
+            for maximum comfort during long prayers.
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">✨</div>
+          <div class="feature-title">Handcrafted Embroidery</div>
+          <div class="feature-text">
+            Each stitch is placed by master artisans with decades of experience
+            in traditional Islamic needlework.
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">🚚</div>
+          <div class="feature-title">Fast Delivery</div>
+          <div class="feature-text">
+            Order before Ramadan and receive within 3–5 business days.
+            Express next-day delivery available in major cities.
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">💚</div>
+          <div class="feature-title">WhatsApp Orders</div>
+          <div class="feature-text">
+            Prefer simplicity? Just tap our WhatsApp button and place your order
+            in minutes. We respond within hours.
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">🏅</div>
+          <div class="feature-title">Quality Guaranteed</div>
+          <div class="feature-text">
+            Not happy? We offer easy returns and exchanges within 7 days.
+            Your satisfaction is our honor.
+          </div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">🎁</div>
+          <div class="feature-title">Gift Packaging</div>
+          <div class="feature-text">
+            Order in elegant Ramadan gift boxes — perfect for Eidi gifts,
+            family presents, and mosque collections.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <p class="section-tag centered reveal" style="color: var(--gold);">Get In Touch</p>
+      <h2 class="section-title light reveal">Order or <span class="gold">Contact Us</span></h2>
+      <p class="section-sub light reveal">
+        We're here to help you find the perfect Ramadan Topi. Reach out anytime!
+      </p>
+
+      <div class="contact-wrapper">
+        <!-- Contact Info -->
+        <div class="contact-info reveal">
+          <h3>Al-Noor Topi House</h3>
+          <p>
+            Bringing you the finest Ramadan caps since 2010.
+            We serve customers across Pakistan with love, quality, and timely delivery.
+          </p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div class="contact-detail-text">
+              <strong>Address</strong>
+              Al-Noor Market, Anarkali Bazaar, Lahore, Pakistan
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📞</div>
+            <div class="contact-detail-text">
+              <strong>Phone</strong>
+              +92-300-1234567
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">⏰</div>
+            <div class="contact-detail-text">
+              <strong>Hours (Ramadan)</strong>
+              Daily 9:00 AM – 12:00 AM
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📧</div>
+            <div class="contact-detail-text">
+              <strong>Email</strong>
+              orders@alnoortopi.pk
+            </div>
+          </div>
+
+          <button class="wa-big-btn" onclick="openWhatsApp()">
+            <span class="wa-icon">📱</span>
+            Order on WhatsApp Now
+          </button>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form reveal">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input class="form-input" type="text" id="contactName" placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input class="form-input" type="tel" id="contactPhone" placeholder="+92-300-0000000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Message / Order</label>
+            <textarea class="form-textarea" id="contactMsg"
+              placeholder="Tell us which topi you'd like, size, quantity..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="submitForm()">Send Message ✉️</button>
+          <div class="form-success" id="formSuccess">
+            ✅ Message sent! We'll contact you within a few hours. Ramadan Mubarak! 🌙
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <!-- Brand -->
+        <div>
+          <div class="footer-brand-logo">
+            <svg width="36" height="36" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" fill="none" stroke="#c9963a" stroke-width="1"/>
+              <path d="M20 8 A12 12 0 1 1 20 32 A8 8 0 1 0 20 8Z" fill="#c9963a"/>
+              <polygon points="26,14 27,17 30,17 27.5,19 28.5,22 26,20.5 23.5,22 24.5,19 22,17 25,17"
+                       fill="#c9963a"/>
+            </svg>
+            <div class="footer-brand-name">Al-Noor Topi House</div>
+          </div>
+          <p class="footer-brand-desc">
+            Your trusted source for premium handcrafted Ramadan caps since 2010.
+            Quality, devotion, and elegance in every stitch.
+          </p>
+          <div class="footer-social">
+            <div class="social-icon" title="Facebook">f</div>
+            <div class="social-icon" title="Instagram">📸</div>
+            <div class="social-icon" title="WhatsApp">💬</div>
+            <div class="social-icon" title="YouTube">▶</div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <div class="footer-heading">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#features">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Collections -->
+        <div>
+          <div class="footer-heading">Collections</div>
+          <ul class="footer-links">
+            <li><a href="#">Classic White</a></li>
+            <li><a href="#">Embroidered</a></li>
+            <li><a href="#">Zardozi</a></li>
+            <li><a href="#">Kids Topi</a></li>
+            <li><a href="#">Gift Sets</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <div class="footer-heading">Support</div>
+          <ul class="footer-links">
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Care Instructions</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-ramadan">رمضان کریم — Ramadan Kareem 🌙</div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 <span>Al-Noor Topi House</span>. All Rights Reserved.</p>
+        <p class="footer-copy">
+          Wishing you a blessed and peaceful Ramadan. <span>جزاك الله خيرا</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== WHATSAPP FLOATING BUTTON ==================== -->
+  <button class="wa-float" onclick="openWhatsApp()" title="Order on WhatsApp">📱</button>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
